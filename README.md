@@ -1,5 +1,7 @@
 # Quran Learn - Noorani Qaida PWA
 
+**Live:** [https://quran-teacher-syndaps.vercel.app](https://quran-teacher-syndaps.vercel.app)
+
 Quran pora shekhar mobile-first web app (PWA). Ekdom basic theke — Arabic horof, harakat, tanween, sukun, madd ebong word practice. Bangla o English duita bhashay cholbe.
 
 ## Features
