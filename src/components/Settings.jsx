@@ -60,6 +60,9 @@ export default function Settings({ lang, t, onChangeLang, onReset }) {
           </a>
           <a href="mailto:firozkabir.consultant@gmail.com">Email</a>
         </div>
+        <a className="author-email" href="mailto:firozkabir.consultant@gmail.com">
+          firozkabir.consultant@gmail.com
+        </a>
       </section>
     </>
   )

@@ -484,24 +484,30 @@ button {
   line-height: 1.5;
 }
 
-/* ---------- Credit ---------- */
-.credit {
+/* ---------- Author / Credit ---------- */
+.author-card {
+  margin-top: 24px;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 16px;
   text-align: center;
+  border: 2px solid var(--cream-dark);
+}
+
+.author-label {
+  margin: 0 0 4px;
   font-size: 0.8rem;
   color: var(--ink-soft);
-  margin: 26px 0 0;
-}
-
-.credit a {
-  color: var(--green);
   font-weight: 700;
-  text-decoration: none;
 }
 
+.author-name,
 .dev-name {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   font-weight: 800;
-  color: var(--ink);
+  font-size: 1.15rem;
+  color: var(--green-dark);
 }
 
 .dev-links {
@@ -524,4 +530,14 @@ button {
 
 .dev-links a:active {
   border-color: var(--gold);
+}
+
+.author-email {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  word-break: break-all;
 }

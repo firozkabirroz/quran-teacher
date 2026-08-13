@@ -41,12 +41,26 @@ export default function Home({ lang, t, lessons, completed, onOpen }) {
         })}
       </div>
 
-      <p className="credit">
-        {t.developedBy}{' '}
-        <a href="https://github.com/firozkabirroz/" target="_blank" rel="noopener noreferrer">
-          Firoz Kabir
+      <footer className="author-card">
+        <p className="author-label">{t.developedBy}</p>
+        <p className="author-name">Firoz Kabir</p>
+        <div className="dev-links">
+          <a href="https://github.com/firozkabirroz/" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          <a
+            href="https://www.facebook.com/flywithfiroz"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Facebook
+          </a>
+          <a href="mailto:firozkabir.consultant@gmail.com">Email</a>
+        </div>
+        <a className="author-email" href="mailto:firozkabir.consultant@gmail.com">
+          firozkabir.consultant@gmail.com
         </a>
-      </p>
+      </footer>
     </>
   )
 }
