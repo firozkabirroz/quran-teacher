@@ -9,7 +9,30 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icon.svg'],
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,mp3,webmanifest}']
+        globPatterns: ['**/*.{js,css,html,svg,png,ico,mp3,webmanifest}'],
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/api\.alquran\.cloud\/.*/i,
+            handler: 'StaleWhileRevalidate',
+            options: { cacheName: 'quran-api' }
+          },
+          {
+            urlPattern: /^https:\/\/cdn\.islamic\.network\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'quran-audio',
+              expiration: { maxEntries: 400, maxAgeSeconds: 60 * 60 * 24 * 30 }
+            }
+          },
+          {
+            urlPattern: /^https:\/\/everyayah\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'quran-audio-alt',
+              expiration: { maxEntries: 400, maxAgeSeconds: 60 * 60 * 24 * 30 }
+            }
+          }
+        ]
       },
       manifest: {
         name: 'Quran Learn - Noorani Qaida',

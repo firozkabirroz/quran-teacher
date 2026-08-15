@@ -5,6 +5,8 @@ import { getCompletedLessons, markLessonComplete, resetProgress } from './progre
 import Home from './components/Home.jsx'
 import LessonView from './components/LessonView.jsx'
 import Settings from './components/Settings.jsx'
+import QuranList from './components/QuranList.jsx'
+import QuranReader from './components/QuranReader.jsx'
 
 export default function App() {
   const [lang, setLang] = useState(getSavedLang)
@@ -17,6 +19,11 @@ export default function App() {
     document.body.dataset.lang = lang
     document.documentElement.lang = lang
   }, [lang])
+
+  useEffect(() => {
+    const reading = screen.name === 'quran' || screen.name === 'reader'
+    document.getElementById('root')?.classList.toggle('reading', reading)
+  }, [screen])
 
   const toggleLang = () => {
     const next = lang === 'bn' ? 'en' : 'bn'
@@ -31,6 +38,7 @@ export default function App() {
 
   const openLesson = (lessonId) => setScreen({ name: 'lesson', lessonId })
   const goHome = () => setScreen({ name: 'home' })
+  const goQuran = () => setScreen({ name: 'quran' })
 
   const completeLesson = (lessonId) => {
     setCompleted([...markLessonComplete(lessonId)])
@@ -49,13 +57,22 @@ export default function App() {
       ? activeLesson.title[lang]
       : screen.name === 'settings'
         ? t.settings
-        : t.appName
+        : screen.name === 'quran'
+          ? t.quranTitle
+          : screen.name === 'reader'
+            ? t.quranTitle
+            : t.appName
+
+  const goBack = () => {
+    if (screen.name === 'reader') setScreen({ name: 'quran' })
+    else goHome()
+  }
 
   return (
     <>
       <header className="header">
         {screen.name !== 'home' && (
-          <button className="icon-btn" onClick={goHome} aria-label={t.backHome}>
+          <button className="icon-btn" onClick={goBack} aria-label={t.backHome}>
             &#8592;
           </button>
         )}
@@ -74,9 +91,16 @@ export default function App() {
         )}
       </header>
 
-      <main className="main">
+      <main className={`main${screen.name === 'reader' ? ' main-reader' : ''}`}>
         {screen.name === 'home' && (
-          <Home lang={lang} t={t} lessons={lessons} completed={completed} onOpen={openLesson} />
+          <Home
+            lang={lang}
+            t={t}
+            lessons={lessons}
+            completed={completed}
+            onOpen={openLesson}
+            onOpenQuran={goQuran}
+          />
         )}
         {screen.name === 'lesson' && (
           <LessonView
@@ -86,6 +110,22 @@ export default function App() {
             lesson={activeLesson}
             onComplete={() => completeLesson(activeLesson.id)}
             onExit={goHome}
+          />
+        )}
+        {screen.name === 'quran' && (
+          <QuranList
+            lang={lang}
+            t={t}
+            onOpen={(number) => setScreen({ name: 'reader', surahNumber: number })}
+          />
+        )}
+        {screen.name === 'reader' && (
+          <QuranReader
+            key={screen.surahNumber}
+            lang={lang}
+            t={t}
+            surahNumber={screen.surahNumber}
+            onChangeSurah={(number) => setScreen({ name: 'reader', surahNumber: number })}
           />
         )}
         {screen.name === 'settings' && (

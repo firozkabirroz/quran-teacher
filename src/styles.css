@@ -14,7 +14,7 @@
   --shadow: 0 4px 14px rgba(10, 70, 54, 0.12);
   --font-ui: 'Nunito', 'Noto Sans Bengali', sans-serif;
   --font-bn: 'Noto Sans Bengali', 'Nunito', sans-serif;
-  --font-ar: 'Amiri', serif;
+  --font-ar: 'Amiri Quran', 'Scheherazade New', 'Noto Naskh Arabic', 'Amiri', serif;
 }
 
 * {
@@ -45,6 +45,11 @@ body[data-lang='bn'] {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+
+#root.reading {
+  max-width: 720px;
 }
 
 button {
@@ -211,6 +216,9 @@ button {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: visible;
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 .lesson-card.done .glyph {
@@ -276,12 +284,17 @@ button {
 
 .letter-card .arabic {
   font-family: var(--font-ar);
-  font-size: clamp(4rem, 24vw, 7rem);
-  line-height: 1.35;
+  font-size: clamp(3.4rem, 20vw, 6.2rem);
+  line-height: 2.2;
   color: var(--green-dark);
   direction: rtl;
+  unicode-bidi: isolate;
   margin-bottom: 6px;
-  word-spacing: 0.35em;
+  word-spacing: 0.18em;
+  letter-spacing: 0;
+  overflow: visible;
+  padding: 0.25em 0.2em;
+  font-feature-settings: 'liga' 1, 'calt' 1, 'rlig' 1, 'locl' 1, 'mark' 1, 'mkmk' 1;
 }
 
 .letter-card .arabic.small {
@@ -540,4 +553,284 @@ button {
   font-weight: 600;
   text-decoration: none;
   word-break: break-all;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.quran-entry {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  border: 2px solid var(--gold);
+}
+
+.quran-entry .info {
+  flex: 1;
+  min-width: 0;
+}
+
+.quran-entry .info h3 {
+  margin: 0 0 2px;
+  font-size: 1rem;
+}
+
+.quran-entry .info p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.quran-entry .status {
+  font-size: 1.2rem;
+  color: var(--green);
+  font-weight: 800;
+}
+
+.search-wrap {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.search-input {
+  width: 100%;
+  border: 2px solid var(--cream-dark);
+  background: var(--white);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--green);
+}
+
+.surah-card .surah-num {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--cream-dark);
+  color: var(--green-dark);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.glyph.surah-ar {
+  font-family: var(--font-ar);
+  font-size: 1.35rem;
+  width: auto;
+  min-width: 56px;
+  padding: 0 8px;
+  line-height: 2.2;
+  direction: rtl;
+  overflow: visible;
+}
+
+/* ---------- Quran Arabic typography ---------- */
+.quran-arabic {
+  font-family: var(--font-ar);
+  font-size: clamp(1.55rem, 4.6vw, 2.05rem);
+  font-weight: 400;
+  line-height: 2.45;
+  direction: rtl;
+  unicode-bidi: isolate;
+  text-align: right;
+  color: var(--green-dark);
+  letter-spacing: 0;
+  word-spacing: 0.22em;
+  overflow: visible;
+  padding: 0.45em 0.2em 0.55em;
+  margin: 0;
+  white-space: normal;
+  hyphens: none;
+  font-kerning: none;
+  font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
+  font-feature-settings: 'liga' 1, 'calt' 1, 'rlig' 1, 'locl' 1, 'mark' 1, 'mkmk' 1, 'curs' 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bismillah {
+  text-align: center;
+  font-size: clamp(1.45rem, 4.2vw, 1.9rem);
+  margin: 4px 0 18px;
+  color: var(--green);
+}
+
+.main-reader {
+  padding-bottom: 108px;
+}
+
+.reader-head {
+  margin-bottom: 14px;
+}
+
+.reader-title {
+  margin: 0 0 4px;
+  font-size: 1.25rem;
+  color: var(--green-dark);
+}
+
+.reader-meta {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.reader-name-ar {
+  font-family: var(--font-ar);
+  font-size: 1.2rem;
+  direction: rtl;
+  unicode-bidi: isolate;
+  line-height: 2.2;
+}
+
+.reader-toggles {
+  margin-bottom: 16px;
+}
+
+.ayah-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ayah-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: var(--white);
+  border: 2px solid var(--cream-dark);
+  border-radius: 18px;
+  padding: 12px 12px 14px;
+  cursor: pointer;
+  overflow: visible;
+}
+
+.ayah-row.active {
+  border-color: var(--gold);
+  background: #fffaf0;
+  box-shadow: var(--shadow);
+}
+
+.ayah-badge {
+  flex-shrink: 0;
+  margin-top: 0.85em;
+  min-width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  color: var(--green);
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ayah-body {
+  flex: 1;
+  min-width: 0;
+  overflow: visible;
+}
+
+.ayah-translation {
+  margin: 0;
+  padding: 0.15em 0.1em 0.35em;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  text-align: left;
+}
+
+body[data-lang='bn'] .ayah-translation {
+  font-family: var(--font-bn);
+  text-align: left;
+}
+
+.layout-split .ayah-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+@media (min-width: 640px) {
+  .layout-split .ayah-body {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  .layout-split .quran-arabic {
+    padding-inline-end: 8px;
+  }
+
+  .layout-split .ayah-translation {
+    padding-top: 0.55em;
+    border-inline-start: 2px solid var(--cream-dark);
+    padding-inline-start: 14px;
+  }
+}
+
+.audio-bar {
+  position: sticky;
+  bottom: 12px;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--green);
+  color: var(--white);
+  border-radius: 18px;
+  padding: 10px 12px;
+  box-shadow: var(--shadow);
+  margin-top: 18px;
+}
+
+.audio-ctrl {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.audio-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.audio-info strong {
+  font-size: 0.9rem;
+}
+
+.audio-info span {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.reader-nav {
+  margin-top: 16px;
 }

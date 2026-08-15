@@ -1,4 +1,4 @@
-export default function Home({ lang, t, lessons, completed, onOpen }) {
+export default function Home({ lang, t, lessons, completed, onOpen, onOpenQuran }) {
   const doneCount = lessons.filter((l) => completed.includes(l.id)).length
   const pct = Math.round((doneCount / lessons.length) * 100)
 
@@ -14,6 +14,15 @@ export default function Home({ lang, t, lessons, completed, onOpen }) {
           {lang === 'bn' ? `${doneCount}/${lessons.length} ${t.lessonsDone}` : `${doneCount}/${lessons.length} ${t.lessonsDone}`}
         </div>
       </section>
+
+      <button className="quran-entry" onClick={onOpenQuran}>
+        <span className="glyph surah-ar">ق</span>
+        <span className="info">
+          <h3>{t.readQuran}</h3>
+          <p>{t.readQuranHint}</p>
+        </span>
+        <span className="status">&#8250;</span>
+      </button>
 
       <div className="lesson-list">
         {lessons.map((lesson, index) => {
