@@ -13,28 +13,6 @@ Quran pora shekhar mobile-first web app (PWA). Ekdom basic theke — Arabic horo
 - Progress automatic save hoy (browser er localStorage e)
 - PWA: phone e "Add to Home Screen" kore app er moto install kora jay, offline o chole
 
-## Kivabe chalaben
-
-```bash
-npm install
-npm run dev
-```
-
-Terminal e je address dekhabe (jemon `http://localhost:5173`) seta browser e khulun.
-
-### Phone e test korte
-
-1. Computer ar phone same WiFi te rakhun
-2. `npm run dev` cholar somoy terminal e "Network:" er pashe je address dekhabe (jemon `http://192.168.0.105:5173`) seta phone er browser e khulun
-
-### Production build
-
-```bash
-npm run build
-npm run preview
-```
-
-`dist` folder ta Netlify / Vercel / GitHub Pages e free te host kora jay. Host korle phone theke "Add to Home Screen" diye install korun — tokhon offline o cholbe.
 
 ## Audio na shunle
 
